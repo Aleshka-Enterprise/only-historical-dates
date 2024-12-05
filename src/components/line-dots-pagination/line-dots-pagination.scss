@@ -1,18 +1,18 @@
 .pag_container {
     display: flex;
     gap: 10px;
-}
 
-.pag {
-    width: 6px;
-    height: 6px;
-    background-color: var(--black-blue);
-    opacity: 0.4;
-    border-radius: 50%;
-    transition: opacity 0.15s ease-in-out;
-    display: block;
-}
-
-.active {
-    opacity: 1;
+    .pag {
+        width: 6px;
+        height: 6px;
+        background-color: var(--black-blue);
+        opacity: 0.4;
+        border-radius: 50%;
+        transition: opacity 0.15s ease-in-out;
+        display: block;
+    }
+    
+    .active {
+        opacity: 1;
+    }
 }

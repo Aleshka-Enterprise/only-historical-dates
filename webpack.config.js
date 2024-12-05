@@ -4,45 +4,39 @@ module.exports = {
   entry: './src/index.tsx',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
+    clean: true
+  },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.json', '.css', '.scss']
   },
   module: {
     rules: [
       {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1,
-              modules: {
-                localIdentName: '[name]_[local]_[hash:base64:5]'
-              }
-            }
-          }
-        ],
-        include: /\.module\.css$/
-      },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
-        exclude: /\.module\.css$/
-      },
-      {
-        test: /\.scss$/, // This line handles regular SCSS files
-        use: ['style-loader', 'css-loader', 'sass-loader']
-      },
-      {
         test: /\.tsx?$/,
         use: 'ts-loader',
         exclude: /node_modules/
+      },
+      {
+        test: /\.js$/,
+        use: 'babel-loader',
+        exclude: /node_modules/
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.scss$/,
+        use: ['style-loader', 'css-loader', 'sass-loader']
+      },
+      {
+        test: /\.json$/,
+        type: 'json'
       }
     ]
   },
-  resolve: {
-    extensions: ['.tsx', '.ts', '.js', '.scss']
-  },
+  devtool: 'source-map',
   devServer: {
     static: {
       directory: path.join(__dirname, 'dist')
