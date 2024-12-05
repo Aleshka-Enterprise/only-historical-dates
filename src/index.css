@@ -1,0 +1,97 @@
+:root {
+    --black-blue: #42567a;
+    --iris: #3877ee;
+    --fuschia: #ef5da8;
+    --grey: #f4f5f9;
+    /* 53/192 - соотношение размера контейнера к ширине 1920рх */
+    --circle-container-proportion: calc(53/192);
+}
+
+@font-face {
+    font-family: 'PTSans';
+    src: url(./assets/fonts/PTSans-Bold.ttf);
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PTSans';
+    src: url(./assets/fonts/PTSans-Regular.ttf);
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Bebas Neue';
+    src: url(./assets/fonts/BebasNeue-Regular.ttf);
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+a {
+    text-decoration: none;
+}
+
+article {
+    margin: 0;
+}
+
+p {
+    margin: 0;
+}
+
+picture {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+img {
+    max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    margin: 0;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+button {
+    margin: 0;
+    padding: 0;
+    border: none;
+    color: white;
+}
+
+body {
+    min-width: 320px;
+    font-family: 'PTSans', 'Bebas Neue', sans-serif;
+    margin: 0;
+}
+
+

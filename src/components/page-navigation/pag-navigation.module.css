@@ -1,0 +1,62 @@
+.counter {
+    display: inline-block;
+    margin-bottom: 20px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    color: var(--black-blue);
+}
+
+.nav_buttons_container {
+    display: flex;
+    gap: 21px;
+}
+
+.btn {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0);
+    border: 1px solid rgba(66, 86, 122, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.15s ease-out;
+}
+
+.btn:hover {
+    background-color: white;
+}
+
+.btn__disable {
+    border: 1px solid rgba(66, 86, 122, 0.2);
+    cursor: default;
+}
+
+.btn__disable:hover {
+    background-color: rgba(0,0,0,0);
+}
+
+@media (max-width: 1440px) {
+    .btn {
+        width: 35px;
+        height: 35px;
+    }
+    .nav_buttons_container {
+        gap: 14px;
+    }
+}
+
+@media (max-width: 1060px) {
+    .btn {
+        width: 25px;
+        height: 25px;
+    }
+    .nav_buttons_container {
+        gap: 8px;
+    }
+    .counter {
+        margin-bottom: 10px;
+    }
+}
