@@ -30,8 +30,8 @@
 
 1. **Клонируйте репозиторий**:
     ```bash
-    git clone <ссылка_на_репозиторий>
-    cd <имя_папки_репозитория>
+    git clone git@github.com:Aleshka-Enterprise/only-historical-dates.git
+    cd only-historical-dates
     ```
 
 2. **Установите зависимости**:
@@ -46,15 +46,6 @@
 
 4. **Откройте в браузере**:
     Перейдите по адресу [http://localhost:3000](http://localhost:3000) для просмотра приложения.
-
-## Структура проекта
-
-- `src/` - исходный код приложения
-  - `components/` - компоненты React
-  - `styles/` - файлы стилей SASS/SCSS
-  - `utils/` - утилитарные функции
-- `public/` - статические файлы
-- `webpack.config.js` - конфигурация Webpack
 
 ## Демонстрация
 
