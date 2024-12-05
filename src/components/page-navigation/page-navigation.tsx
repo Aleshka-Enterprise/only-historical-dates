@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import ArrowIcon from '../icons/arrow-icon';
 
-import styles from './pag-navigation.module.css';
+import './pag-navigation.scss';
 
 interface IPageNavigationProps {
   activeIndex: number;
@@ -31,21 +31,21 @@ const PageNavigation: FC<IPageNavigationProps> = ({ dataLength, activeIndex, set
 
   return (
     <div>
-      <span className={styles.counter}>
+      <span className='counter'>
         {`${(activeIndex + 1).toString().padStart(2, '0')}/${dataLength
           .toString()
           .padStart(2, '0')}`}
       </span>
-      <div className={styles.nav_buttons_container}>
+      <div className='nav_buttons_container'>
         <button
-          className={`${styles.btn} ${isSelectedMinIndex ? styles.btn__disable : ''}`}
+          className={`btn ${isSelectedMinIndex ? 'btn__disable' : ''}`}
           onClick={(): void => onButtonClick(isSelectedMinIndex, 'prev')}
           disabled={isDisabled}
         >
           <ArrowIcon isActive={isSelectedMinIndex} direction='left' />
         </button>
         <button
-          className={`${styles.btn} ${isSelectedMaxIndex ? styles.btn__disable : ''}`}
+          className={`btn ${isSelectedMaxIndex ? 'btn__disable' : ''}`}
           onClick={(): void => onButtonClick(isSelectedMaxIndex, 'next')}
           disabled={isDisabled}
         >

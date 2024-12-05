@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import style from './slide.module.css';
+import './slide.scss';
 import { IInfo } from '../../models/events';
 
 interface ISlideProps extends IInfo {
@@ -16,8 +16,8 @@ interface ISlideProps extends IInfo {
 export const Slide: FC<ISlideProps> = ({ year, description, slideHash }): React.ReactElement => {
   return (
     <article className={`slide_${slideHash}`}>
-      <div className={style.title}>{year}</div>
-      <div className={style.description}>{description}</div>
+      <div className='slide-title'>{year}</div>
+      <div className='slide-description'>{description}</div>
     </article>
   );
 };

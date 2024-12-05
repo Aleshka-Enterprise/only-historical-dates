@@ -1,4 +1,4 @@
-.container {
+.pagination-container {
     position: absolute;
     width: calc(100vw * var(--circle-container-proportion));
     height: calc(100vw * var(--circle-container-proportion));
@@ -13,7 +13,7 @@
 }
 
 @media (max-width: 820px) {
-    .container {
+    .pagination-container {
         border: none;
     }
 }

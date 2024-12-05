@@ -1,4 +1,4 @@
-.pag {
+.circle-pag {
     position: absolute;
     display: flex;
     justify-content: center;
@@ -27,7 +27,7 @@
     transition: 0.3s ease-in-out;
 }
 
-.pag:hover {
+.circle-pag:hover {
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -41,7 +41,7 @@
     border: 1px solid rgba(48, 62, 88, 0.5);
 }
 
-.pag_container {
+.circle-pag-container {
     position: absolute;
     display: flex;
     justify-content: center;

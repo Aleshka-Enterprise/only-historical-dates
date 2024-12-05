@@ -1,4 +1,4 @@
-.title {
+.slide-title {
     margin-bottom: 12px;
     font-family: "Bebas Neue", sans-serif;
     font-weight: 400;
@@ -8,7 +8,7 @@
     color: var(--iris);
 }
 
-.description {
+.slide-description {
     font-weight: 400;
     font-size: 20px;
     line-height: 150%;
@@ -16,20 +16,20 @@
 }
 
 @media (max-width: 1500px) {
-    .description {
+    .slide-description {
         font-size: 16px;
     }
-    .title {
+    .slide-title {
         font-size: 20px;
     }
 }
 
 @media (max-width: 820px) {
-    .description {
+    .slide-description {
         font-size: 14px;
         line-height: 145%;
     }
-    .title {
+    .slide-title {
         font-size: 16px;
         margin-bottom: 15px;
     }

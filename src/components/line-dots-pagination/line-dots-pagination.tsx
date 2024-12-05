@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { IData } from '../../models/events';
 
-import style from './line-dots-pagination.module.css';
+import './line-dots-pagination.scss';
 
 interface ILineDotsPaginationProps {
   data: IData[];
@@ -22,12 +22,12 @@ const LineDotsPagination: FC<ILineDotsPaginationProps> = ({
   setActiveIndex
 }): React.ReactElement => {
   return (
-    <div className={style.pag_container}>
+    <div className='pag_container'>
       {data.map((_, index) => {
         return (
           <span
             key={index}
-            className={`${style.pag} ${activeIndex === index ? style.active : ''}`}
+            className={`pag ${activeIndex === index ? 'active' : ''}`}
             onClick={(): void => setActiveIndex(index)}
           ></span>
         );

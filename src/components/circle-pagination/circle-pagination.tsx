@@ -1,9 +1,10 @@
 import React, { FC, RefObject, useEffect, useRef, useState } from 'react';
-import style from './pagination.module.css';
 import { Circ, gsap } from 'gsap';
 import CirclePage from '../circle-page/circle-page';
 import uuid from 'react-uuid';
 import { IData } from '../../models/events';
+
+import './pagination.scss';
 
 interface ICirclePagination {
   data: IData[];
@@ -84,10 +85,10 @@ export const CirclePagination: FC<ICirclePagination> = ({
   return (
     <div
       ref={containerRef}
-      className={style.container}
+      className='pagination-container'
       style={{ marginTop: getContainerMarginTop(pageWidth) }}
     >
-      <div className={style.wrapper}>
+      <div className='wrapper'>
         {data.map((dataItem, index) => {
           return (
             <CirclePage

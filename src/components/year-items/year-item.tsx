@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
-import styles from './year-item.module.css';
 import { Circ, gsap } from 'gsap';
+
+import './year-item.scss';
 
 interface IYearItemsProps {
   startYear: string;
@@ -54,11 +55,11 @@ const YearItems: FC<IYearItemsProps> = ({
   }, [startYear, endYear]);
 
   return (
-    <div className={styles.yearContainer}>
-      <span ref={startYearRef} className={styles.year}>
+    <div className='yearContainer'>
+      <span ref={startYearRef} className='year'>
         {startYear}
       </span>
-      <span ref={endYearRef} className={styles.year}>
+      <span ref={endYearRef} className='year'>
         {endYear}
       </span>
     </div>

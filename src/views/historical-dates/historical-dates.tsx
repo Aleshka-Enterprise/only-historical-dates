@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Swiper as SwiperClass } from 'swiper/types';
 import { Circ, gsap } from 'gsap';
-import styles from './historical-dates.module.css';
 import { CirclePagination } from '../../components/circle-pagination/circle-pagination';
 import LineDotsPagination from '../../components/line-dots-pagination/line-dots-pagination';
 import YearItems from '../../components/year-items/year-item';
@@ -10,6 +9,8 @@ import { Slide } from '../../components/slide/slide';
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import uuid from 'react-uuid';
 import { mockData } from '../../utils/mock-data';
+
+import './historical-dates.scss';
 
 interface IPrevState {
   firstYear: string
@@ -76,8 +77,8 @@ export const HistoricalDates = (): React.ReactElement => {
   }, [activeIndex]);
 
   return (
-    <div className={`${styles.grid_container}`}>
-      <div className={styles.container} ref={gridRef}>
+    <div className='grid_container'>
+      <div className='container' ref={gridRef}>
       {pageWidth > 820
         ? (
           <CirclePagination
@@ -88,12 +89,12 @@ export const HistoricalDates = (): React.ReactElement => {
           />
           )
         : (
-          <div className={styles.pagination_container}>
+          <div className='pagination_container'>
             <LineDotsPagination data={mockData} activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
           </div>
           )}
-        <div className={styles.content}>
-          <h1 className={styles.title}>Исторические даты</h1>
+        <div className='content'>
+          <h1 className='title'>Исторические даты</h1>
           <YearItems
             startYear={mockData[activeIndex].firstYear}
             endYear={mockData[activeIndex].secondYear}
@@ -101,15 +102,15 @@ export const HistoricalDates = (): React.ReactElement => {
             previousEndYear={typeof prevYears?.secondYear === 'string' ? prevYears.secondYear : '0'}
           />
         </div>
-        <span className={styles.line}></span>
-        <div className={styles.navigation}>
+        <span className='line'></span>
+        <div className='navigation'>
           <PagNavigation
             activeIndex={activeIndex}
             dataLength={mockData.length}
             setActiveIndex={setActiveIndex}
           />
         </div>
-        <div className={styles.swiper}>
+        <div className='swiper'>
           <button
             className={`swiper-button-prev ${swiperState.isBeginning ? 'disable' : ''}`}
             onClick={(): void => {

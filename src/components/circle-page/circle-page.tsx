@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useRef } from 'react';
 import { gsap, Sine } from 'gsap';
 
-import style from './circle-pag.module.css';
+import './circle-pag.scss';
 
 interface ICirclePag {
   index: number;
@@ -63,19 +63,19 @@ const CirclePag: FC<ICirclePag> = ({
   return (
     <div>
       <div
-        className={`${style.pag_container} pag_${pagHash}`}
+        className={`circle-pag-container pag_${pagHash}`}
         style={{
           left: rotatePag(index)[0],
           top: rotatePag(index)[1]
         }}
       >
         <span
-          className={`${style.pag} ${activeIndex === index ? style.active : ''}`}
+          className={`circle-pag ${activeIndex === index ? 'active' : ''}`}
           onClick={(): void => setActiveIndex(index)}
         >
           {index + 1}
         </span>
-        <span ref={ref} className={`${style.pag_text} pag_text`}>
+        <span ref={ref} className={'pag_text pag_text'}>
           {paginationText}
         </span>
       </div>
