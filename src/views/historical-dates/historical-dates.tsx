@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import { Swiper as SwiperClass } from 'swiper/types';
 import { Circ, gsap } from 'gsap';
 import { CirclePagination } from '../../components/circle-pagination/circle-pagination';
@@ -13,13 +13,13 @@ import { mockData } from '../../utils/mock-data';
 import './historical-dates.scss';
 
 interface IPrevState {
-  firstYear: string
-  secondYear: string
+  firstYear: string;
+  secondYear: string;
 }
 
 interface ISwiperState {
-  isBeginning: boolean
-  isEnd?: boolean
+  isBeginning: boolean;
+  isEnd?: boolean;
 }
 
 const SWIPER_BREAKPOINTS = {
@@ -29,24 +29,21 @@ const SWIPER_BREAKPOINTS = {
   512: { slidesPerView: 2, spaceBetween: 50 }
 };
 
-const pageWidth = window.innerWidth;
-
 const slideHash = uuid();
 
 /**
  * Представление 'Исторические даты'
  */
-export const HistoricalDates = (): React.ReactElement => {
+export const HistoricalDates: FC = () => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
-  const [prevYears, setPrevYears] = useState<IPrevState>();
+  const [prevYears, setPrevYears] = useState<IPrevState>({ firstYear: '', secondYear: '' });
   const [swiper, setSwiper] = useState<SwiperClass>();
   const [swiperState, setSwiperState] = useState<ISwiperState>({ isBeginning: true });
   const ref = useRef<SwiperRef>(null);
   const gridRef = useRef<HTMLDivElement>(null);
 
   const changeInfo = (slideHash: string): void => {
-    gsap
-      .timeline()
+    gsap.timeline()
       .to(`.slide_${slideHash}`, {
         opacity: 0,
         y: 10,
@@ -63,43 +60,48 @@ export const HistoricalDates = (): React.ReactElement => {
   };
 
   useEffect(() => {
-    if (ref?.current?.swiper) {
-      setSwiper(ref?.current?.swiper);
+    if (ref.current?.swiper) {
+      setSwiper(ref.current.swiper);
     }
-  }, [ref, swiper]);
+  }, [ref]);
 
   useEffect(() => {
-    setPrevYears({
-      firstYear: mockData[activeIndex].firstYear,
-      secondYear: mockData[activeIndex].secondYear
-    });
+    const { firstYear, secondYear } = mockData[activeIndex];
+    setPrevYears({ firstYear, secondYear });
     changeInfo(slideHash);
   }, [activeIndex]);
+
+  const handleSlideChange = (): void => {
+    swiper?.update();
+    if (swiper) {
+      setSwiperState({ isEnd: swiper.isEnd, isBeginning: swiper.isBeginning });
+    }
+  };
 
   return (
     <div className='grid_container'>
       <div className='container' ref={gridRef}>
-      {pageWidth > 820
-        ? (
+        {window.innerWidth > 820
+          ? (
           <CirclePagination
             data={mockData}
             activeIndex={activeIndex}
             setActiveIndex={setActiveIndex}
             gridRef={gridRef}
           />
-          )
-        : (
+            )
+          : (
           <div className='pagination_container'>
             <LineDotsPagination data={mockData} activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
           </div>
-          )}
+            )}
         <div className='content'>
           <h1 className='title'>Исторические даты</h1>
           <YearItems
             startYear={mockData[activeIndex].firstYear}
             endYear={mockData[activeIndex].secondYear}
-            previousStartYear={typeof prevYears?.firstYear === 'string' ? prevYears.firstYear : '0'}
-            previousEndYear={typeof prevYears?.secondYear === 'string' ? prevYears.secondYear : '0'}
+            previousStartYear={prevYears.firstYear || '0'}
+            previousEndYear={prevYears.secondYear || '0'}
           />
         </div>
         <span className='line'></span>
@@ -110,49 +112,36 @@ export const HistoricalDates = (): React.ReactElement => {
             setActiveIndex={setActiveIndex}
           />
         </div>
-        <div className='swiper'>
+        <div className='slider'>
           <button
             className={`swiper-button-prev ${swiperState.isBeginning ? 'disable' : ''}`}
             onClick={(): void => {
-              if (swiper) {
-                swiper.slidePrev();
-              }
+              swiper?.slidePrev()
             }}
-          ></button>
+          />
           <Swiper
             ref={ref}
             slidesPerView={1.4}
             spaceBetween={25}
-            onSlideChange={(): void => {
-              swiper?.update();
-              if (swiper) {
-                setSwiperState({ isEnd: swiper?.isEnd, isBeginning: swiper?.isBeginning });
-              }
-            }}
+            onSlideChange={handleSlideChange}
             breakpoints={SWIPER_BREAKPOINTS}
           >
-            <>
-              {mockData[activeIndex].info.map((dataItem, index): React.ReactElement => {
-                return (
-                  <SwiperSlide key={index}>
-                    <Slide
-                      year={dataItem.year}
-                      description={dataItem.description}
-                      slideHash={slideHash}
-                    />
-                  </SwiperSlide>
-                );
-              })}
-            </>
+            {mockData[activeIndex].info.map((dataItem, index) => (
+              <SwiperSlide key={index}>
+                <Slide
+                  year={dataItem.year}
+                  description={dataItem.description}
+                  slideHash={slideHash}
+                />
+              </SwiperSlide>
+            ))}
           </Swiper>
           <button
             className={`swiper-button-next ${swiperState.isEnd ? 'disable' : ''}`}
             onClick={(): void => {
-              if (swiper) {
-                swiper.slideNext();
-              }
+              swiper?.slideNext()
             }}
-          ></button>
+          />
         </div>
       </div>
     </div>

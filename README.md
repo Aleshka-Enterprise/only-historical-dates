@@ -1,5 +1,4 @@
 # only-historical-dates
-Тестовое задание
 
 ## Описание
 

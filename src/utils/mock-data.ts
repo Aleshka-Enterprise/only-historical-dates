@@ -3,7 +3,7 @@ import { IData } from '../models/events';
 
 export const mockData: IData[] = [
   {
-    firstYear: '1900',
+    firstYear: '1903',
     secondYear: '1950',
     info: [
       {
@@ -30,8 +30,8 @@ export const mockData: IData[] = [
     paginationText: 'Авиация'
   },
   {
-    firstYear: '1951',
-    secondYear: '2000',
+    firstYear: '1953',
+    secondYear: '1986',
     info: [
       {
         year: '1953',
@@ -84,8 +84,8 @@ export const mockData: IData[] = [
     paginationText: 'Современная история'
   },
   {
-    firstYear: '1800',
-    secondYear: '1900',
+    firstYear: '1804',
+    secondYear: '1895',
     info: [
       {
         year: '1804',
@@ -111,8 +111,8 @@ export const mockData: IData[] = [
     paginationText: 'Технологические достижения'
   },
   {
-    firstYear: '1901',
-    secondYear: '1950',
+    firstYear: '1914',
+    secondYear: '1949',
     info: [
       {
         year: '1914',
@@ -138,8 +138,8 @@ export const mockData: IData[] = [
     paginationText: 'Мировая политика'
   },
   {
-    firstYear: '1950',
-    secondYear: '2020',
+    firstYear: '1963',
+    secondYear: '2016',
     info: [
       {
         year: '1963',

@@ -16,25 +16,25 @@ interface IPageNavigationProps {
  * @param activeIndex Индекс активной точки
  * @param setActiveIndex Функция для изменения активной точки
  */
-const PageNavigation: FC<IPageNavigationProps> = ({ dataLength, activeIndex, setActiveIndex }): React.ReactElement => {
+const PageNavigation: FC<IPageNavigationProps> = ({ dataLength, activeIndex, setActiveIndex }) => {
   const isSelectedMaxIndex = activeIndex === dataLength - 1;
   const isSelectedMinIndex = activeIndex === 0;
   const [isDisabled, setIsDisabled] = useState(false);
 
-  const onButtonClick = (condition: boolean, type: 'prev' | 'next'): void => {
-    setActiveIndex(condition ? activeIndex : activeIndex + (type === 'prev' ? -1 : 1));
-    if (window.innerWidth >= 821) {
-      setIsDisabled(true);
-      setTimeout(() => setIsDisabled(false), 800);
+  const onButtonClick = (isAtBoundary: boolean, direction: 'prev' | 'next'): void => {
+    if (!isAtBoundary) {
+      setActiveIndex(activeIndex + (direction === 'prev' ? -1 : 1));
+      if (window.innerWidth >= 821) {
+        setIsDisabled(true);
+        setTimeout(() => setIsDisabled(false), 800);
+      }
     }
   };
 
   return (
     <div>
       <span className='counter'>
-        {`${(activeIndex + 1).toString().padStart(2, '0')}/${dataLength
-          .toString()
-          .padStart(2, '0')}`}
+        {`${(activeIndex + 1).toString().padStart(2, '0')}/${dataLength.toString().padStart(2, '0')}`}
       </span>
       <div className='nav_buttons_container'>
         <button

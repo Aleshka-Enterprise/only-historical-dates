@@ -6,7 +6,7 @@ import { IData } from '../../models/events';
 
 import './pagination.scss';
 
-interface ICirclePagination {
+interface ICirclePaginationProps {
   data: IData[];
   activeIndex: number;
   setActiveIndex: (index: number) => void;
@@ -21,18 +21,19 @@ interface ICirclePagination {
  * @param setActiveIndex Функция для изменения активной точки
  * @param gridRef Ссылка на объект с сеткой, для вычисления высоты блока
  */
-export const CirclePagination: FC<ICirclePagination> = ({
+export const CirclePagination: FC<ICirclePaginationProps> = ({
   data,
   activeIndex,
   setActiveIndex,
   gridRef
-}): React.ReactElement => {
+}) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [pageWidth, setPageWidth] = useState(window.innerWidth);
   const [pagHash] = useState(uuid().slice(-6));
 
   const gridElementHeight = gridRef.current?.offsetHeight || 0;
 
+  // Обработчик изменения размера окна
   const handleWindowSizeChange = (): void => {
     setPageWidth(window.innerWidth);
   };
@@ -46,6 +47,7 @@ export const CirclePagination: FC<ICirclePagination> = ({
     return pageWidth <= 820 ? 0 : gridElementHeight * 0.4444 - (pageWidth * (53 / 192)) / 2;
   };
 
+  // Вычисление координат для вращения пагинации
   const rotatePag = (index: number): [number, number] => {
     const R = (pageWidth * (53 / 192)) / 2;
     const activePagSize = 56;
@@ -61,6 +63,7 @@ export const CirclePagination: FC<ICirclePagination> = ({
     return [x + R, y + R];
   };
 
+  // Вращение пагинации и контейнера
   const rotateCircle = (length: number, index: number, pagHash: string): void => {
     gsap.to(containerRef.current, {
       duration: 1.5,
@@ -80,7 +83,7 @@ export const CirclePagination: FC<ICirclePagination> = ({
   }, [activeIndex]);
 
   const getPaginationText = (dataItem: IData): string =>
-    dataItem.paginationText ? dataItem.paginationText : '';
+    dataItem.paginationText || '';
 
   return (
     <div
@@ -89,19 +92,17 @@ export const CirclePagination: FC<ICirclePagination> = ({
       style={{ marginTop: getContainerMarginTop(pageWidth) }}
     >
       <div className='wrapper'>
-        {data.map((dataItem, index) => {
-          return (
-            <CirclePage
-              key={index}
-              index={index}
-              setActiveIndex={setActiveIndex}
-              activeIndex={activeIndex}
-              rotatePag={rotatePag}
-              paginationText={getPaginationText(dataItem)}
-              pagHash={pagHash}
-            />
-          );
-        })}
+        {data.map((dataItem, index) => (
+          <CirclePage
+            key={index}
+            index={index}
+            setActiveIndex={setActiveIndex}
+            activeIndex={activeIndex}
+            rotatePag={rotatePag}
+            paginationText={getPaginationText(dataItem)}
+            pagHash={pagHash}
+          />
+        ))}
       </div>
     </div>
   );

@@ -20,18 +20,16 @@ const LineDotsPagination: FC<ILineDotsPaginationProps> = ({
   data,
   activeIndex,
   setActiveIndex
-}): React.ReactElement => {
+}) => {
   return (
     <div className='pag_container'>
-      {data.map((_, index) => {
-        return (
-          <span
-            key={index}
-            className={`pag ${activeIndex === index ? 'active' : ''}`}
-            onClick={(): void => setActiveIndex(index)}
-          ></span>
-        );
-      })}
+      {data.map((_, index) => (
+        <span
+          key={index}
+          className={`pag ${activeIndex === index ? 'active' : ''}`}
+          onClick={(): void => setActiveIndex(index)}
+        />
+      ))}
     </div>
   );
 };

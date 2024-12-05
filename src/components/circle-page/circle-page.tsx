@@ -3,7 +3,7 @@ import { gsap, Sine } from 'gsap';
 
 import './circle-pag.scss';
 
-interface ICirclePag {
+interface ICirclePagProps {
   index: number;
   activeIndex: number;
   setActiveIndex: (index: number) => void;
@@ -22,7 +22,7 @@ interface ICirclePag {
  * @param paginationText Текст, располагающийся рядом с активной точкой
  * @param pagHash Хэш для класса pag
  */
-const CirclePag: FC<ICirclePag> = ({
+const CirclePag: FC<ICirclePagProps> = ({
   index,
   activeIndex,
   setActiveIndex,
@@ -32,7 +32,8 @@ const CirclePag: FC<ICirclePag> = ({
 }) => {
   const ref = useRef<HTMLDivElement>(null);
 
-  const animation = (duration: number): void => {
+  // Анимация активной точки
+  const animateActivePoint = (duration: number): void => {
     gsap.to(ref.current, {
       delay: 0.1,
       fontSize: 20
@@ -44,7 +45,7 @@ const CirclePag: FC<ICirclePag> = ({
     });
   };
 
-  const hide = (): void => {
+  const hidePoint = (): void => {
     gsap.to(ref.current, {
       duration: 0.2,
       opacity: 0,
@@ -54,31 +55,29 @@ const CirclePag: FC<ICirclePag> = ({
 
   useEffect(() => {
     if (activeIndex === index) {
-      animation(1);
+      animateActivePoint(1);
     } else {
-      hide();
+      hidePoint();
     }
   }, [activeIndex, index]);
 
   return (
-    <div>
-      <div
-        className={`circle-pag-container pag_${pagHash}`}
-        style={{
-          left: rotatePag(index)[0],
-          top: rotatePag(index)[1]
-        }}
+    <div
+      className={`circle-pag-container pag_${pagHash}`}
+      style={{
+        left: rotatePag(index)[0],
+        top: rotatePag(index)[1]
+      }}
+    >
+      <span
+        className={`circle-pag ${activeIndex === index ? 'active' : ''}`}
+        onClick={(): void => setActiveIndex(index)}
       >
-        <span
-          className={`circle-pag ${activeIndex === index ? 'active' : ''}`}
-          onClick={(): void => setActiveIndex(index)}
-        >
-          {index + 1}
-        </span>
-        <span ref={ref} className={'pag_text pag_text'}>
-          {paginationText}
-        </span>
-      </div>
+        {index + 1}
+      </span>
+      <span ref={ref} className='pag_text'>
+        {paginationText}
+      </span>
     </div>
   );
 };

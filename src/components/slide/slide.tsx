@@ -13,7 +13,7 @@ interface ISlideProps extends IInfo {
  * @param description Описание события
  * @param slideHash Хэш для класса slide
  */
-export const Slide: FC<ISlideProps> = ({ year, description, slideHash }): React.ReactElement => {
+export const Slide: FC<ISlideProps> = ({ year, description, slideHash }) => {
   return (
     <article className={`slide_${slideHash}`}>
       <div className='slide-title'>{year}</div>
