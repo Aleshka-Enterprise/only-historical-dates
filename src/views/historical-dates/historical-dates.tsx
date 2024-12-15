@@ -7,7 +7,6 @@ import YearItems from '../../components/year-items/year-item';
 import PagNavigation from '../../components/page-navigation/page-navigation';
 import { Slide } from '../../components/slide/slide';
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
-import uuid from 'react-uuid';
 import { mockData } from '../../utils/mock-data';
 
 import './historical-dates.scss';
@@ -29,8 +28,6 @@ const SWIPER_BREAKPOINTS = {
   512: { slidesPerView: 2, spaceBetween: 50 }
 };
 
-const slideHash = uuid();
-
 /**
  * Представление 'Исторические даты'
  */
@@ -42,15 +39,15 @@ export const HistoricalDates: FC = () => {
   const ref = useRef<SwiperRef>(null);
   const gridRef = useRef<HTMLDivElement>(null);
 
-  const changeInfo = (slideHash: string): void => {
+  const changeInfo = (): void => {
     gsap.timeline()
-      .to(`.slide_${slideHash}`, {
+      .to('.slide', {
         opacity: 0,
         y: 10,
         duration: 0.3,
         ease: Circ.easeInOut
       })
-      .to(`.slide_${slideHash}`, {
+      .to('.slide', {
         opacity: 1,
         y: 0,
         duration: 1,
@@ -68,7 +65,10 @@ export const HistoricalDates: FC = () => {
   useEffect(() => {
     const { firstYear, secondYear } = mockData[activeIndex];
     setPrevYears({ firstYear, secondYear });
-    changeInfo(slideHash);
+    changeInfo();
+    setTimeout(() => {
+      swiper?.slideTo(0);
+    }, 500)
   }, [activeIndex]);
 
   const handleSlideChange = (): void => {
@@ -126,12 +126,11 @@ export const HistoricalDates: FC = () => {
             onSlideChange={handleSlideChange}
             breakpoints={SWIPER_BREAKPOINTS}
           >
-            {mockData[activeIndex].info.map((dataItem, index) => (
-              <SwiperSlide key={index}>
+            {mockData[activeIndex].info.map((dataItem) => (
+              <SwiperSlide key={dataItem.description}>
                 <Slide
                   year={dataItem.year}
                   description={dataItem.description}
-                  slideHash={slideHash}
                 />
               </SwiperSlide>
             ))}

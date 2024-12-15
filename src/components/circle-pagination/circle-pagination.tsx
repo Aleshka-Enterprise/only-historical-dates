@@ -1,7 +1,6 @@
 import React, { FC, RefObject, useEffect, useRef, useState } from 'react';
 import { Circ, gsap } from 'gsap';
-import CirclePage from '../circle-page/circle-page';
-import uuid from 'react-uuid';
+import CirclePage from '../circle-pag/circle-pag';
 import { IData } from '../../models/events';
 
 import './pagination.scss';
@@ -28,8 +27,7 @@ export const CirclePagination: FC<ICirclePaginationProps> = ({
   gridRef
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [pageWidth, setPageWidth] = useState(window.innerWidth);
-  const [pagHash] = useState(uuid().slice(-6));
+  const [pagWidth, setPageWidth] = useState(window.innerWidth);
 
   const gridElementHeight = gridRef.current?.offsetHeight || 0;
 
@@ -49,9 +47,9 @@ export const CirclePagination: FC<ICirclePaginationProps> = ({
 
   // Вычисление координат для вращения пагинации
   const rotatePag = (index: number): [number, number] => {
-    const R = (pageWidth * (53 / 192)) / 2;
+    const R = (pagWidth * (53 / 192)) / 2;
     const activePagSize = 56;
-    const gridColumnWidth = pageWidth / 24;
+    const gridColumnWidth = pagWidth / 24;
 
     const radian =
       index * ((2 * Math.PI) / data.length) -
@@ -64,14 +62,14 @@ export const CirclePagination: FC<ICirclePaginationProps> = ({
   };
 
   // Вращение пагинации и контейнера
-  const rotateCircle = (length: number, index: number, pagHash: string): void => {
+  const rotateCircle = (length: number, index: number): void => {
     gsap.to(containerRef.current, {
       duration: 1.5,
       rotation: -(360 / length) * index,
       ease: Circ.easeOut
     });
 
-    gsap.to(`.pag_${pagHash}`, {
+    gsap.to('.pag', {
       duration: 1.5,
       rotation: (360 / length) * index,
       ease: Circ.easeOut
@@ -79,17 +77,18 @@ export const CirclePagination: FC<ICirclePaginationProps> = ({
   };
 
   useEffect(() => {
-    rotateCircle(data.length, activeIndex, pagHash);
+    rotateCircle(data.length, activeIndex);
   }, [activeIndex]);
 
-  const getPaginationText = (dataItem: IData): string =>
-    dataItem.paginationText || '';
+  const getPaginationText = (dataItem: IData): string => {
+    return dataItem.paginationText || '';
+  }
 
   return (
     <div
       ref={containerRef}
       className='pagination-container'
-      style={{ marginTop: getContainerMarginTop(pageWidth) }}
+      style={{ marginTop: getContainerMarginTop(pagWidth) }}
     >
       <div className='wrapper'>
         {data.map((dataItem, index) => (
@@ -100,7 +99,6 @@ export const CirclePagination: FC<ICirclePaginationProps> = ({
             activeIndex={activeIndex}
             rotatePag={rotatePag}
             paginationText={getPaginationText(dataItem)}
-            pagHash={pagHash}
           />
         ))}
       </div>

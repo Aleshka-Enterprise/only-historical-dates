@@ -34,7 +34,7 @@
 
 2. **Установите зависимости**:
     ```bash
-    npm install
+    npm install --legacy-peer-deps
     ```
 
 3. **Запустите проект**:

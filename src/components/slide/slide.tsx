@@ -2,20 +2,17 @@ import React, { FC } from 'react';
 import './slide.scss';
 import { IInfo } from '../../models/events';
 
-interface ISlideProps extends IInfo {
-  slideHash: string;
-}
+interface ISlideProps extends IInfo {}
 
 /**
- * Слайды с фактом
+ * Слайд с фактом
  *
  * @param title Год, в котором произошло описанное событие
  * @param description Описание события
- * @param slideHash Хэш для класса slide
  */
-export const Slide: FC<ISlideProps> = ({ year, description, slideHash }) => {
+export const Slide: FC<ISlideProps> = ({ year, description }) => {
   return (
-    <article className={`slide_${slideHash}`}>
+    <article className={'slide'}>
       <div className='slide-title'>{year}</div>
       <div className='slide-description'>{description}</div>
     </article>
